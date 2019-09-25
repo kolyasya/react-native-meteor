@@ -56,6 +56,7 @@
     "sinon": "^1.17.3"
   },
   "peerDependencies": {
+    "@react-native-community/async-storage": "*",
     "@react-native-community/netinfo": "*",
     "react": "*",
     "react-native": ">= 0.49.0"
