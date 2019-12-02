@@ -1,11 +1,19 @@
 'use strict';
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { ListView } from 'react-native';
 
 import Data from '../Data';
 
 export default class MeteorListView extends Component {
+  static propTypes = {
+    collection: PropTypes.string.isRequired,
+    selector: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    options: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    renderRow: PropTypes.func.isRequired,
+    listViewRef: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  };
   static defaultProps = {
     selector: {},
   };
