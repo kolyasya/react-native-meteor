@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, StyleSheet, TextInput, Dimensions } from 'react-native';
 import Meteor, { connectMeteor, Accounts } from 'react-native-meteor';
 import Button from '../components/button';
@@ -165,12 +164,6 @@ class AccountsComponent extends Component {
     );
   }
 }
-
-AccountsComponent.propTypes = {
-  loggingIn: PropTypes.bool.isRequired,
-  user: PropTypes.object,
-  userId: PropTypes.string
-};
 
 export default AccountsComponent;
 

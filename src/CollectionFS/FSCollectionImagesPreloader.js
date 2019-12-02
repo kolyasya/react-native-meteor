@@ -1,17 +1,12 @@
 'use strict';
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { View, Image, StyleSheet } from 'react-native';
 
 import Data from '../Data';
 import setProperties from './setProperties';
 
 export default class FSCollectionImagesPreloader extends Component {
-  static propTypes = {
-    collection: PropTypes.string.isRequired,
-    selector: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  };
   static defaultProps = {
     selector: {},
   };
