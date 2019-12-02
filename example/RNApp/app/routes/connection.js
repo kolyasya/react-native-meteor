@@ -1,6 +1,5 @@
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { View, Text, StyleSheet } from 'react-native';
 import Meteor, { connectMeteor } from 'react-native-meteor';
 
@@ -39,10 +38,6 @@ class Connection extends Component {
     );
   }
 }
-
-Connection.propTypes = {
-  status: PropTypes.object.isRequired
-};
 
 export default Connection;
 
