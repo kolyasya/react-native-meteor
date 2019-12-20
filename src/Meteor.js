@@ -98,15 +98,19 @@ module.exports = {
 
     Data.ddp.on('connected', () => {
       // Clear the collections of any stale data in case this is a reconnect
-      if (Data.db && Data.db.collections) {
-        for (var collection in Data.db.collections) {
-          Data.db[collection].remove({});
+      // This options might be disabled
+      if (!(options && options.disableDBResetOnReconnect)) {
+        if (Data.db && Data.db.collections) {
+          for (var collection in Data.db.collections) {
+            Data.db[collection].remove({});
+          }
         }
       }
+      
 
       Data.notify('change');
 
-      console.info('Connected to DDP server.');
+      console.info(`Connected to DDP server — ${endpoint}`);
       this._loadInitialUser().then(() => {
         this._subscriptionsRestart();
       });
