@@ -310,7 +310,7 @@ module.exports = {
 
         Trackr.afterFlush(function() {
           if (Data.subscriptions[id] && Data.subscriptions[id].inactive) {
-            handle.stop();
+            //handle.stop();
           }
         });
       });
