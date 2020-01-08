@@ -90,7 +90,7 @@ module.exports = {
       ...options,
     });
 
-    NetInfo.isConnected.addEventListener('connectionChange', isConnected => {
+    NetInfo.addEventListener(({ isConnected }) => {
       if (isConnected && Data.ddp.autoReconnect) {
         Data.ddp.connect();
       }
@@ -265,7 +265,7 @@ module.exports = {
         readyDeps: new Trackr.Dependency(),
         readyCallback: callbacks.onReady,
         stopCallback: callbacks.onStop,
-        stop: function() {
+        stop: function () {
           Data.ddp.unsub(this.subIdRemember);
           delete Data.subscriptions[this.id];
           this.ready && this.readyDeps.changed();
@@ -279,10 +279,10 @@ module.exports = {
 
     // return a handle to the application.
     var handle = {
-      stop: function() {
+      stop: function () {
         if (Data.subscriptions[id]) Data.subscriptions[id].stop();
       },
-      ready: function() {
+      ready: function () {
         if (!Data.subscriptions[id]) return false;
 
         var record = Data.subscriptions[id];
@@ -299,12 +299,12 @@ module.exports = {
       // as a change to mark the subscription "inactive" so that it can
       // be reused from the rerun.  If it isn't reused, it's killed from
       // an afterFlush.
-      Trackr.onInvalidate(function(c) {
+      Trackr.onInvalidate(function (c) {
         if (Data.subscriptions[id]) {
           Data.subscriptions[id].inactive = true;
         }
 
-        Trackr.afterFlush(function() {
+        Trackr.afterFlush(function () {
           if (Data.subscriptions[id] && Data.subscriptions[id].inactive) {
             handle.stop();
           }
