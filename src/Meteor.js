@@ -69,7 +69,12 @@ module.exports = {
   _subscriptionsRestart() {
     for (var i in Data.subscriptions) {
       const sub = Data.subscriptions[i];
-      Data.ddp.unsub(sub.subIdRemember);
+
+      // No need to unsubscribe from existing connections, as later-version Meteor servers
+      // don't appear to persist sessions from connection to connection, and therefore likely
+      // expire these session/subs immediately on disconnect.
+      // TODO: This should probably be validated with Meteor APM / Kadira.
+
       sub.subIdRemember = Data.ddp.sub(sub.name, sub.params);
     }
   },
@@ -107,7 +112,6 @@ module.exports = {
         }
       }
       
-
       Data.notify('change');
 
       console.info(`Connected to DDP server — ${endpoint}`);
