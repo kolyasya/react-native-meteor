@@ -25,7 +25,9 @@ module.exports = {
   logout(callback) {
     call('logout', err => {
       this.handleLogout();
-      this.connect();
+      // Not sure why connect() call was placed here
+      // In our case it creates unused connection on each logout
+      // this.connect();
 
       typeof callback == 'function' && callback(err);
     });
